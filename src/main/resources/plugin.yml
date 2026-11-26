@@ -1,0 +1,17 @@
+name: ThrowingDisk
+version: '${version}'
+main: dev.throwingdisk.ThrowingDiskPlugin
+api-version: '1.21'
+description: Boomerang-style throwing disk
+author: Endersploit
+commands:
+  throwingdisk:
+    description: Throwing Disk admin command
+    usage: /throwingdisk <give|reload|pack>
+    aliases: [tdisk]
+    permission: throwingdisk.admin
+permissions:
+  throwingdisk.admin:
+    default: op
+  throwingdisk.use:
+    default: true

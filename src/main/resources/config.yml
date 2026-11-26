@@ -1,0 +1,20 @@
+item:
+  material: ECHO_SHARD
+  name: "Throwing Disk"
+throw:
+  speed: 1.6            # blocks per tick on launch
+  gravity: 0.006        # downward acceleration, blocks/tick^2
+  max-range: 22.0       # blocks travelled before returning
+  return-speed: 1.4     # blocks per tick while returning
+  max-flight-ticks: 200 # failsafe: disk is handed back after this
+  max-active-per-player: 2
+  catch-distance: 1.3
+damage:
+  amount: 6.0
+  hit-again-on-return: true
+visual:
+  spin-degrees-per-tick: 55.0
+  scale: 0.9
+  view-range: 2.0
+sound:
+  volume: 1.0
