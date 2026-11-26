@@ -2,7 +2,6 @@ package dev.throwingdisk;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -20,7 +19,13 @@ public final class ResourcePackGenerator {
     public static Path generate(Path dataFolder) throws IOException {
         Files.createDirectories(dataFolder);
         Path out = dataFolder.resolve("ThrowingDiskPack.zip");
-        try (ZipOutputStream zip = new ZipOutputStream(Files.newOutputStream(out))) {
+        Files.write(out, build());
+        return out;
+    }
+
+    public static byte[] build() throws IOException {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        try (ZipOutputStream zip = new ZipOutputStream(bos)) {
             put(zip, "pack.mcmeta", ("{\"pack\":{\"description\":\"Throwing Disk\",\"pack_format\":75,"
                     + "\"supported_formats\":{\"min_inclusive\":46,\"max_inclusive\":99}}}")
                     .getBytes(StandardCharsets.UTF_8));
@@ -32,7 +37,7 @@ public final class ResourcePackGenerator {
                             + "{\"layer0\":\"throwingdisk:item/disk\"}}").getBytes(StandardCharsets.UTF_8));
             put(zip, "assets/throwingdisk/textures/item/disk.png", texture());
         }
-        return out;
+        return bos.toByteArray();
     }
 
     private static void put(ZipOutputStream zip, String name, byte[] data) throws IOException {
@@ -45,7 +50,6 @@ public final class ResourcePackGenerator {
         int n = 32;
         BufferedImage img = new BufferedImage(n, n, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = img.createGraphics();
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
         g.setColor(new Color(40, 50, 70));
         g.fillOval(2, 2, 28, 28);
         g.setColor(new Color(70, 200, 230));

@@ -1,6 +1,11 @@
 item:
-  material: ECHO_SHARD
+  material: ECHO_SHARD   # base item; its look is replaced by the custom model when the pack is loaded
   name: "Throwing Disk"
+resourcepack:
+  enabled: true          # host the pack and send it to players on join
+  host: ""               # REQUIRED: your server's public IP or domain (what players connect to)
+  port: 8123             # TCP port to open/forward for the pack download
+  required: false
 throw:
   speed: 1.6            # blocks per tick on launch
   gravity: 0.006        # downward acceleration, blocks/tick^2
